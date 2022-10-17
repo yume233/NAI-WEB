@@ -8,7 +8,7 @@ import MouseWheel from '@better-scroll/mouse-wheel'
 
 //=> DOM
 export default (props: any) => {
-	const { children, widht } = props
+	const { children, height } = props
 	const node = useRef<HTMLDivElement>(null)
 	const [BScrollCore, setBScroll] = useState<BScroll | null>(null)
 	useEffect(() => {
@@ -21,8 +21,8 @@ export default (props: any) => {
 				() =>
 					setBScroll(
 						new BScroll(DOM, {
-							scrollX: true,
-							scrollY: false,
+							scrollX: false,
+							scrollY: true,
 							mouseWheel: true
 						})
 					),
@@ -35,32 +35,38 @@ export default (props: any) => {
 			setTimeout(() => BScrollCore.refresh(), 1000)
 			BScrollCore.scrollTo(0, 0)
 		}
-	}, [widht])
+	}, [height])
 	return (
 		<ImgBox ref={node}>
-			<div style={{ width: widht }}>{children}</div>
+			<div style={{ height: height }}>{children}</div>
 		</ImgBox>
 	)
 }
 const ImgBox = styled.div`
+	height: 100%;
+	width: 15%;
 	position: relative;
+	margin-right: 10px;
+	max-height: 100%;
+	overflow: hidden;
 	/* background-color: #ececec; */
-	width: 100vw;
-	max-height: 90vh;
+	/* width: 100vw;
+	max-height: 90vh; */
 	> div {
 		overflow: hidden;
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		flex-wrap: nowrap;
+		align-items: center;
+		justify-content: flex-start;
 	}
 	img {
 		:hover {
 			box-shadow: 0px 0px 8px 2px #594f4f96;
 		}
+		object-fit: cover;
 		position: relative;
-		margin: 5px;
-		width: auto;
-		height: auto;
+		margin: 10px;
 		max-width: 100%;
 		max-height: 100%;
 		animation: fadenum 1s 1;

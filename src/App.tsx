@@ -4,18 +4,18 @@ import axios from 'axios'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import localforage from 'localforage'
-import ImgBox from './pages/Imgbox/index'
+import Imgs from './pages/Imgbox/index'
 import Switch from '@mui/material/Switch'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import CircularProgress from '@mui/material/CircularProgress'
 export default function App() {
 	const [imgs, setImgs] = useState([]) as any
 	const [tags, setTags] = useState([]) as any
+	const [img, setImg] = useState(String)
 	const [nsfw, setNsfw] = useState(false)
 	const [wide, setWide] = useState(false)
 	const [lodading, setLoading] = useState(false)
 	const getImageData = async () => {
-		console.log(tags)
 		setLoading(true)
 		await axios({
 			method: 'post',
@@ -34,7 +34,9 @@ export default function App() {
 			.then(async res => {
 				const images = await localforage.keys()
 				await localforage.setItem(`IMAGE_${images.length + 1}`, res.data)
-				setImgs([...imgs, URL.createObjectURL(res.data)])
+				const url = URL.createObjectURL(res.data)
+				setImgs([...imgs, url])
+				setImg(url)
 				setLoading(false)
 			})
 			.catch(err => {
@@ -59,6 +61,7 @@ export default function App() {
 			keys.forEach(async (key: any) => {
 				localforage.getItem(key).then((value: any) => {
 					setTimeout(() => {
+						setImg(URL.createObjectURL(value))
 						setImgs((imgs: any) => [...imgs, URL.createObjectURL(value)])
 					}, 1000)
 				})
@@ -90,7 +93,6 @@ export default function App() {
 								}}
 							/>
 						}
-						disabled
 						label='宽/窄'
 					/>
 
@@ -132,23 +134,28 @@ export default function App() {
 					/>
 				</div>
 			</InputArea>
-			<div>
-				<ImgBox widht={768 * imgs.length}>
+			<ImgBox>
+				<MainImg>
+					<div>
+						<img src={img} />
+					</div>
+				</MainImg>
+				<Imgs height={768 * imgs.length}>
 					{imgs
 						.map((item: any, index: number) => {
-							if ((index & 1) === 0 && index !== 0)
-								return <img key={index} src={item} />
+							return (
+								<img
+									key={index}
+									src={item}
+									onClick={e => {
+										setImg(item)
+									}}
+								/>
+							)
 						})
 						.reverse()}
-				</ImgBox>
-				<ImgBox widht={768 * imgs.length}>
-					{imgs
-						.map((item: any, index: number) => {
-							if ((index & 2) === 0) return <img key={index} src={item} />
-						})
-						.reverse()}
-				</ImgBox>
-			</div>
+				</Imgs>
+			</ImgBox>
 		</Main>
 	)
 }
@@ -174,7 +181,6 @@ const Text = styled(TextField)`
 
 const InputArea = styled.div`
 	margin-top: 10px;
-	height: 13vh;
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -188,5 +194,27 @@ const InputArea = styled.div`
 			align-content: center;
 			align-items: center;
 		}
+	}
+`
+
+const ImgBox = styled.div`
+	overflow: hidden;
+	width: 100vw;
+	height: 87vh;
+	align-content: center;
+	justify-content: center;
+	display: flex;
+`
+const MainImg = styled.div`
+	align-content: center;
+	justify-content: center;
+	display: flex;
+	width: 85%;
+	height: 100%;
+	align-items: center;
+	img {
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: cover;
 	}
 `
