@@ -15,6 +15,7 @@ export default function App() {
 	const [wide, setWide] = useState(false)
 	const [lodading, setLoading] = useState(false)
 	const getImageData = async () => {
+		console.log(tags)
 		setLoading(true)
 		await axios({
 			method: 'post',
@@ -44,6 +45,7 @@ export default function App() {
 	const tagNode = useRef<HTMLInputElement>() as any
 	const saveTag = (value: string) => {
 		window.localStorage.setItem('tag', value)
+		setTags(value)
 	}
 	useEffect(() => {
 		const DOM = tagNode.current
@@ -88,6 +90,7 @@ export default function App() {
 								}}
 							/>
 						}
+						disabled
 						label='宽/窄'
 					/>
 
