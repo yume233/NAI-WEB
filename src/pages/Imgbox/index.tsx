@@ -1,57 +1,33 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import BScroll from '@better-scroll/core'
-import Scrollbar from '@better-scroll/scroll-bar'
-import MouseWheel from '@better-scroll/mouse-wheel'
 
 //[ package ]
 
 //=> DOM
 export default (props: any) => {
-	const { children, height } = props
-	const node = useRef<HTMLDivElement>(null)
-	const [BScrollCore, setBScroll] = useState<BScroll | null>(null)
-	useEffect(() => {
-		if (node) {
-			const DOM = node.current
-			//=> 装载 BetterScroll
-			BScroll.use(Scrollbar)
-			BScroll.use(MouseWheel)
-			setTimeout(
-				() =>
-					setBScroll(
-						new BScroll(DOM, {
-							scrollX: false,
-							scrollY: true,
-							mouseWheel: true
-						})
-					),
-				10
-			)
-		}
-	}, [node])
-	useEffect(() => {
-		if (BScrollCore) {
-			setTimeout(() => BScrollCore.refresh(), 1000)
-			BScrollCore.scrollTo(0, 0)
-		}
-	}, [height])
+	const { children, hide } = props
+
 	return (
-		<ImgBox ref={node}>
-			<div style={{ height: height }}>{children}</div>
+		<ImgBox hide={hide}>
+			<div>{children}</div>
 		</ImgBox>
 	)
 }
-const ImgBox = styled.div`
+const ImgBox = styled.div<{ hide: boolean }>`
 	height: 100%;
-	width: 15%;
+	width: 18%;
 	position: relative;
-	margin-right: 10px;
 	max-height: 100%;
-	overflow: hidden;
+	overflow-y: scroll;
 	/* background-color: #ececec; */
 	/* width: 100vw;
 	max-height: 90vh; */
+	@media screen and (max-width: 768px) {
+		z-index: 99;
+		height: ${({ hide }) => (hide ? '100%' : '0')};
+		opacity: ${({ hide }) => (hide ? '1' : '0')};
+		width: 85%;
+	}
 	> div {
 		overflow: hidden;
 		display: flex;
