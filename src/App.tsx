@@ -233,12 +233,13 @@ export default function App() {
 			<Footer style={{ opacity: imgList ? '0' : '1' }}>
 				<p>
 					2022-{new Date().getFullYear()}{' '}
-					<a href='mailto:umia@umia.moe'>Umia</a>@永恒星轨观测所
+					<a href='https://github.com/yume233'>Umia</a>@永恒星轨观测所
 				</p>
 			</Footer>
 			<div>
 				<Fab
 					color='info'
+					style={{ marginTop: '-200px' }}
 					onClick={() => {
 						setImgList(!imgList)
 					}}
@@ -251,12 +252,12 @@ export default function App() {
 }
 
 const Main = styled.main`
-	/* overflow: hidden; */
+	overflow: hidden;
 	background-color: aliceblue;
 	width: 100vw;
 	height: 100vh;
-	align-items: center;
 	display: flex;
+	align-items: center;
 	flex-direction: column;
 	margin: 0;
 	padding: 0;
