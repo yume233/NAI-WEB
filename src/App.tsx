@@ -10,6 +10,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import CircularProgress from '@mui/material/CircularProgress'
 export default function App() {
 	const [imgs, setImgs] = useState([]) as any
+	const [negative, setNegative] = useState(String)
 	const [tags, setTags] = useState([]) as any
 	const [img, setImg] = useState(String)
 	const [nsfw, setNsfw] = useState(false)
@@ -26,6 +27,7 @@ export default function App() {
 			},
 			data: {
 				tag: tags,
+				negative: negative,
 				wide: wide,
 				nsfw: nsfw
 			},
@@ -45,10 +47,16 @@ export default function App() {
 			})
 	}
 	const tagNode = useRef<HTMLInputElement>() as any
+	const negativeNode = useRef<HTMLInputElement>() as any
 	const saveTag = (value: string) => {
 		window.localStorage.setItem('tag', value)
 		setTags(value)
 	}
+	const saveNegative = (value: string) => {
+		window.localStorage.setItem('negative', value)
+		setNegative(value)
+	}
+
 	useEffect(() => {
 		const DOM = tagNode.current
 		const tag = window.localStorage.getItem('tag')
@@ -56,6 +64,13 @@ export default function App() {
 		console.log(tag)
 		DOM.value = tag
 	}, [tagNode])
+	useEffect(() => {
+		const DOM = tagNode.current
+		const tag = window.localStorage.getItem('negative')
+		setNegative(tag)
+		console.log(tag)
+		DOM.value = tag
+	}, [negativeNode])
 	useEffect(() => {
 		localforage.keys().then((keys: any) => {
 			keys.forEach(async (key: any) => {
@@ -72,17 +87,30 @@ export default function App() {
 	return (
 		<Main>
 			<InputArea>
-				<Text
-					ref={tagNode}
-					style={{ marginBottom: '30px' }}
-					id='filled-basic'
-					variant='standard'
-					label='此处输入tag'
-					defaultValue={tags}
-					multiline
-					rows={4}
-					onChange={e => saveTag(e.target.value)}
-				/>
+				<div>
+					<Text
+						ref={tagNode}
+						style={{ marginBottom: '30px', width: '45vw' }}
+						id='filled-basic'
+						variant='standard'
+						label='Prompt'
+						defaultValue={tags}
+						multiline
+						rows={4}
+						onChange={e => saveTag(e.target.value)}
+					/>
+					<Text
+						ref={negativeNode}
+						style={{ margin: '0 0 10px 50px', width: '45vw' }}
+						id='filled-basic'
+						variant='standard'
+						label='Negative Prompt'
+						defaultValue={negative}
+						multiline
+						rows={4}
+						onChange={e => saveNegative(e.target.value)}
+					/>
+				</div>
 				<div>
 					<FormControlLabel
 						control={
