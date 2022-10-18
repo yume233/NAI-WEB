@@ -95,7 +95,7 @@ export default function App() {
 		if (window.outerWidth > 768) {
 			negativeSw.current.style = 'display: none'
 			setNegativeHide(true)
-			document.documentElement.requestFullscreen()
+			// document.documentElement.requestFullscreen()
 		} else {
 			setNegativeHide(false)
 		}
@@ -353,6 +353,7 @@ const Texts = styled.div`
 		> div {
 			width: 97vw;
 			:last-child {
+				margin-top: 20px;
 				margin-left: 0;
 			}
 		}
