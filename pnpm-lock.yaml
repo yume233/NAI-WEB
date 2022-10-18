@@ -2,9 +2,6 @@ lockfileVersion: 5.4
 
 specifiers:
   '@ant-design/icons': ^4.7.0
-  '@better-scroll/core': ^2.5.0
-  '@better-scroll/mouse-wheel': ^2.5.0
-  '@better-scroll/scroll-bar': ^2.5.0
   '@emotion/react': ^11.10.4
   '@emotion/styled': ^11.10.4
   '@mui/icons-material': ^5.10.9
@@ -19,10 +16,8 @@ specifiers:
   '@types/styled-components': ^5.1.23
   '@vitejs/plugin-react-refresh': ^1.3.6
   axios: ^0.27.2
-  install: ^0.13.0
   less: ^4.1.2
   localforage: ^1.10.0
-  lodash: ^4.17.21
   react: ^18.2.0
   react-dom: ^18.2.0
   react-router-dom: ^6.2.1
@@ -34,9 +29,6 @@ specifiers:
 
 dependencies:
   '@ant-design/icons': 4.7.0_biqbaboplfbrettd7655fr4n2y
-  '@better-scroll/core': 2.5.0
-  '@better-scroll/mouse-wheel': 2.5.0
-  '@better-scroll/scroll-bar': 2.5.0
   '@emotion/react': 11.10.4_iapumuv4e6jcjznwuxpf4tt22e
   '@emotion/styled': 11.10.4_g3tud4ene45llglqap74b5kkse
   '@mui/icons-material': 5.10.9_6usjrp3ypnzobhq35dcwvjrt3m
@@ -51,10 +43,8 @@ dependencies:
   '@types/styled-components': 5.1.26
   '@vitejs/plugin-react-refresh': 1.3.6
   axios: 0.27.2
-  install: 0.13.0
   less: 4.1.3
   localforage: 1.10.0
-  lodash: 4.17.21
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-router-dom: 6.4.2_biqbaboplfbrettd7655fr4n2y
@@ -357,28 +347,6 @@ packages:
       '@babel/helper-string-parser': 7.19.4
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
-    dev: false
-
-  /@better-scroll/core/2.5.0:
-    resolution: {integrity: sha512-+3aKf8T3kUl4Gj1M7NKV3fNFhsrBpTWwHoDClkXVmQ8S3TxMMHf6Kyw6l1zKsg4r+9ukW5lDDkyif7/gY76qXQ==}
-    dependencies:
-      '@better-scroll/shared-utils': 2.5.0
-    dev: false
-
-  /@better-scroll/mouse-wheel/2.5.0:
-    resolution: {integrity: sha512-ZQLAinumoBlW+EO30bKWUcBhlhNh9fI9/8Q6KbIp4vkuUfAYzZPtaVjzFSTtbo5XTTqraH184jtUf3wY0zFNrA==}
-    dependencies:
-      '@better-scroll/core': 2.5.0
-    dev: false
-
-  /@better-scroll/scroll-bar/2.5.0:
-    resolution: {integrity: sha512-eHfVy6mr0Pj1wwmsdHeRgHssxTSOtdytNbAmFq37tvB0StKtPwgm9OFce8cDNM1XpmBfSH/R99PhKW7Qvid5RQ==}
-    dependencies:
-      '@better-scroll/core': 2.5.0
-    dev: false
-
-  /@better-scroll/shared-utils/2.5.0:
-    resolution: {integrity: sha512-5bfR/cwzIFtgWAU5E0CPKcOUvyd7KcgDZyAbOJQT6qqJeUBmTpG4Z8R7qO8uvqdZ0yIXxRPOu4te2Qt6ihGhkQ==}
     dev: false
 
   /@ctrl/tinycolor/3.4.1:
@@ -1705,11 +1673,6 @@ packages:
     dependencies:
       parent-module: 1.0.1
       resolve-from: 4.0.0
-    dev: false
-
-  /install/0.13.0:
-    resolution: {integrity: sha512-zDml/jzr2PKU9I8J/xyZBQn8rPCAY//UOYNmR01XwNwyfhEWObo2SWfSl1+0tm1u6PhxLwDnfsT/6jB7OUxqFA==}
-    engines: {node: '>= 0.10'}
     dev: false
 
   /is-arrayish/0.2.1:
