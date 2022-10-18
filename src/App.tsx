@@ -205,7 +205,12 @@ export default function App() {
 			<ImgBox>
 				<MainImg hide={imgList}>
 					<div>
-						<img src={img} />
+						<img
+							src={img}
+							onClick={() => {
+								setImgList(!imgList)
+							}}
+						/>
 					</div>
 				</MainImg>
 				<Imgs height={300 * imgs.length} hide={imgList}>
@@ -246,7 +251,7 @@ export default function App() {
 }
 
 const Main = styled.main`
-	overflow: hidden;
+	/* overflow: hidden; */
 	background-color: aliceblue;
 	width: 100vw;
 	height: 100vh;
