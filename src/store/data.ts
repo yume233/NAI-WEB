@@ -23,7 +23,7 @@ export function addLoading(value: boolean) {
 export function addNegativeHide(value: boolean) {
 	_negativeHide.set(value)
 }
-export function addisListShow(value: boolean) {
+export function setIsListShow(value: boolean) {
 	_isListShow.set(value)
 }
 export function addNegative(value: string) {

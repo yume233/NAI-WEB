@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStore } from '@nanostores/react'
-import { _isListShow, addisListShow } from 'store/data'
+import { _isListShow, setIsListShow } from 'store/data'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import Fab from '@mui/material/Fab'
 import styled from 'styled-components'
@@ -13,7 +13,7 @@ export default () => {
 				color='info'
 				style={{ marginTop: '-200px' }}
 				onClick={() => {
-					addisListShow(!isListShow)
+					setIsListShow(!isListShow)
 				}}
 			>
 				<ExpandLessIcon />

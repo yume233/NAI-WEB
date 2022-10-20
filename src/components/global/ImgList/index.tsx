@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import {
 	addImg,
 	addImgs,
-	addisListShow,
+	setIsListShow,
 	_imgs,
 	_img,
 	_tags,
@@ -21,17 +21,18 @@ export default (props: any) => {
 	const isListShow = useStore(_isListShow)
 	const img = useStore(_img)
 	useEffect(() => {
+		console.log('触发了')
 		localforage.keys().then((keys: any) => {
-			keys.forEach(async (key: any) => {
-				localforage.getItem(key).then((value: any) => {
-					setTimeout(() => {
-						addImg(URL.createObjectURL(value))
-						addImgs([...imgs, URL.createObjectURL(value)])
-					}, 1000)
-				})
+			Promise.all(
+				keys.map(key =>
+					localforage.getItem(key).then(i => URL.createObjectURL(i as Blob))
+				)
+			).then(imgList => {
+				addImg(imgList[0])
+				addImgs(imgList)
 			})
 		})
-	}, [''])
+	}, [])
 	return (
 		<ImgBox>
 			<MainImg hide={isListShow}>
@@ -39,7 +40,7 @@ export default (props: any) => {
 					<img
 						src={img}
 						onClick={() => {
-							addisListShow(!isListShow)
+							setIsListShow(!isListShow)
 						}}
 					/>
 				</div>
@@ -54,7 +55,7 @@ export default (props: any) => {
 									src={item}
 									onClick={() => {
 										addImg(item)
-										addisListShow(!isListShow)
+										setIsListShow(!isListShow)
 									}}
 								/>
 							)
