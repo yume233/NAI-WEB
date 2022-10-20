@@ -10,6 +10,7 @@ export const _negative = atom<string>()
 export const _tags = atom<string>('')
 export const _img = atom<string>('')
 export const _imgs = atom([])
+export const _imgAnimation = atom<boolean>(false)
 export const _fileName = atom<string>()
 export function addWide(value: boolean) {
 	_wide.set(value)
@@ -37,4 +38,12 @@ export function addImg(value: string) {
 }
 export function addImgs(value: string[]) {
 	_imgs.set(value)
+}
+export function setImgAnimation() {
+	// return new Promise(() => {
+	_imgAnimation.set(!_imgAnimation.get())
+	setTimeout(() => {
+		_imgAnimation.set(!_imgAnimation.get())
+	}, 500)
+	// })
 }

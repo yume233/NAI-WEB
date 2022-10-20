@@ -12,7 +12,9 @@ import {
 	_negative,
 	_wide,
 	_nsfw,
-	_isListShow
+	_isListShow,
+	_imgAnimation,
+	setImgAnimation
 } from 'store/data'
 
 //=> DOM
@@ -20,6 +22,7 @@ export default (props: any) => {
 	const imgs = useStore(_imgs)
 	const isListShow = useStore(_isListShow)
 	const img = useStore(_img)
+	const imgAnimation = useStore(_imgAnimation)
 	useEffect(() => {
 		console.log('触发了')
 		localforage.keys().then((keys: any) => {
@@ -38,6 +41,13 @@ export default (props: any) => {
 			<MainImg hide={isListShow}>
 				<div>
 					<img
+						style={
+							window.outerWidth >= 768
+								? {
+										opacity: imgAnimation ? '0' : '1'
+								  }
+								: {}
+						}
 						src={img}
 						onClick={() => {
 							setIsListShow(!isListShow)
@@ -54,8 +64,15 @@ export default (props: any) => {
 									key={index}
 									src={item}
 									onClick={() => {
-										addImg(item)
 										setIsListShow(!isListShow)
+										setImgAnimation()
+										if (window.outerWidth >= 768) {
+											setTimeout(() => {
+												addImg(item)
+											}, 500)
+										} else {
+											addImg(item)
+										}
 									}}
 								/>
 							)
